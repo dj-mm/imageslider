@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Image Slider BY Manash</title>
+</head>
+<body>
+  <div class="name">
+    <h1> Image slider by Manash </h1>
+  </div>
+  
+  <Div Class="Container">
+    <Div Class="Image-Container">
+        <Img Src="https://i.postimg.cc/vT6R7NBz/DSC-6737.jpg" Id="Content1" Class="Active">
+        <Img Src="https://i.postimg.cc/tRDDD5Pd/DSC-6698.jpg" Id="Content2">
+        <Img Src="https://i.postimg.cc/ZRHP7b9Y/DSC-6715.jpg" Id="Content3">
+        <Img Src="https://i.postimg.cc/T1yyVfg4/DSC-6716.jpg" Id="Content4">
+    </Div>
+    <Div Class="Dot-Container">
+        <Button Onclick = "Dot(1)"></Button>
+        <Button Onclick = "Dot(2)"></Button>
+        <Button Onclick = "Dot(3)"></Button>
+        <Button Onclick = "Dot(4)"></Button>
+    </Div>
+    <Button Id="Prev" Onclick="Prev()"> &Lt; </Button>
+    <Button Id="Next" Onclick="Next()"> &Gt; </Button>
+    <Script Src="Script.Js"></Script>
+</Div>
+<style>
+
+
+*,
+*:Before,
+*:After{
+    Padding: 0;
+    Margin: 0;
+    Box-Sizing: Border-Box;
+}
+.name{
+  text-align: center;
+  padding-top: 50px;
+  color: rgb(171, 215, 27);
+  font-style: initial;
+  font-weight: 400;
+
+}
+Body{
+    Height: 100vh;
+    Background: Linear-Gradient(
+        135deg,
+        #8052ec,
+        #D161ff
+    );
+}
+.Container{
+    Background-Color: #Ffffff;
+    Width: 60%;
+    Min-Width: 520px;
+    Position: Absolute;
+    Transform: Translate(-50%,-50%);
+    Left: 50%;
+    Top: 50%;
+    Border-Radius: 5px;
+    Padding: 30px;
+    Box-Shadow: 0 15px 30px Rgba(0,0,0,0.3);
+}
+.Image-Container{
+    Position: Relative;
+    Width: 100%;
+}
+Img{
+    Position: Relative;
+    Width: 100%;
+    Display: None;
+}
+.Active{
+    Display: Block;
+}
+.Dot-Container{
+    Width: 150px;
+    Margin: 20px Auto 0 Auto;
+    Display: Flex;
+    Align-Items: Center;
+    Justify-Content: Space-Around;
+}
+Button{
+    Outline: None;
+    Cursor: Pointer;
+}
+.Dot-Container Button{
+    Height: 13px;
+    Width: 13px;
+    Border-Radius: 50%;
+    Border: 3px Solid #8052ec;
+    Background-Color: Transparent;
+}
+.Dot-Container Button:nth-Child(1){
+    Background-Color: #8052ec;
+}
+#Prev,#Next{
+    Height: 40px;
+    Width: 40px;
+    Position: Absolute;
+    Background-Color: #8052ec;
+    Color: #Ffffff;
+    Margin: Auto;
+    Top: 0;
+    Bottom: 0;
+    Border: None;
+    Border-Radius: 3px;
+    Font-Size: 18px;
+    Font-Weight: Bolder;
+}
+#Prev{
+    Left: 15px;
+}
+#Next{
+    Right: 15px;
+}
+</style>
+<script>
+let i = 0; // current slide
+let j = 4; // total slides
+
+const dots = document.querySelectorAll(".dot-container button");
+const images = document.querySelectorAll(".image-container img");
+
+function next(){
+    document.getElementById("content" + (i+1)).classList.remove("active");
+    i = ( j + i + 1) % j;
+    document.getElementById("content" + (i+1)).classList.add("active");
+    indicator( i+ 1 );
+}
+
+function prev(){
+    document.getElementById("content" + (i+1)).classList.remove("active");
+    i = (j + i - 1) % j;
+    document.getElementById("content" + (i+1)).classList.add("active");
+    indicator(i+1);
+}
+
+function indicator(num){
+    dots.forEach(function(dot){
+        dot.style.backgroundColor = "transparent";
+    });
+    document.querySelector(".dot-container button:nth-child(" + num + ")").style.backgroundColor = "#8052ec";
+}
+
+function dot(index){
+    images.forEach(function(image){
+        image.classList.remove("active");
+    });
+    document.getElementById("content" + index).classList.add("active");
+    i = index - 1;
+    indicator(index);
+}
+</script>
+
+</body>
+</html>
